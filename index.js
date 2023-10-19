@@ -2,8 +2,10 @@ import express from "express"
 import dotenv from "dotenv"
 import cliente_rutas from "./routes/clientes_rutas.js";
 import db from "./config/db.js";
+import helmet from "helmet"; //modifica cabeceras
 
 const app = express();
+app.use(helmet());
 
 // Habilitar lectura de datos de formularios
 app.use(express.json());
