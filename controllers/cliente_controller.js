@@ -90,7 +90,7 @@ export const inicio_sesion = async(req, res)=>{
     }
     
 
-    
+    console.log(cliente)
     if(!cliente.verificaPassword(contrasena)){
         return res.status(400).json({ 
             errores: [{msg: "Contraseña incorrecta"}]

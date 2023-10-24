@@ -18,7 +18,7 @@ const db = new Sequelize(process.env.BD_NOMBRE, process.env.BD_USER, process.env
     operatorAliases: false
 });
 
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
 
 // Ruta para procesar el formulario y asignar el rol
 // app.post('/asignar-rol', (req, res) => {

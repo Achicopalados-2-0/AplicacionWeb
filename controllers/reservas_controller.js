@@ -29,7 +29,7 @@ import Reservas from "../models/Reservas.js";
       EstadoReserva,
       Comentarios,
     });
-    res.status(201).json(reserva);
+    res.status(201).json({msg:"Reserva exitosa"}, reserva);
   } catch (error) {
     console.error('Error al crear la reserva:', error);
     res.status(500).json({ error: 'Error al crear la reserva' });

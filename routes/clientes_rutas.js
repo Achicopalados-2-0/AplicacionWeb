@@ -8,3 +8,6 @@ router.post("/registro", registro);
 router.post("/inicio_sesion", inicio_sesion);
 router.post("/crearReserva", crearReserva);
   export default router;
+
+  //congelar las peticiones por 3 segundos (SEGURIDAD)
+  //midelware (iniciar sesion)

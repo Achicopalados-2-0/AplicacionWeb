@@ -42,7 +42,8 @@ const Cliente = db.define('Clientes', {
 })
 
 //Contrasena(comparar la contraseña hasheada en la bd, con la contra que ingresa el usuario)
-Cliente.prototype.verificaPassword = function(usuarioPassword){
-    return bcrypt.compareSync(usuarioPassword, this.contrasena)
+Cliente.prototype.verificaPassword = function(contrasena){
+    return bcrypt.compareSync(contrasena, this.Contrasena)
 }
 export default Cliente;
+
