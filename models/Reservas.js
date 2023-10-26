@@ -32,7 +32,7 @@ const Reservas = db.define('Reservas', {
     },
     EstadoReserva: {
         type: DataTypes.ENUM('confirmada', 'pendiente', 'cancelada'),
-        defaultValue: 'pendiente',
+        defaultValue: 'confirmado',
         allowNull: false
     },
     Comentarios: {

@@ -1,5 +1,6 @@
 import {body, param, validationResult} from "express-validator"; //dependencia que ayudara a validar lo que el front envie 
 import Reservas from "../models/Reservas.js";
+import Mesas from "../models/Mesas.js";
 
 //Obtener todas las reservas (pagina administradores)
 // export const getAllReservas=async (req, res)=>{
@@ -29,7 +30,13 @@ import Reservas from "../models/Reservas.js";
       EstadoReserva,
       Comentarios,
     });
-    res.status(201).json({msg:"Reserva exitosa"}, reserva);
+
+await Mesas.update({"EstadoMesa": "confirmada"}, {
+  where:{
+    MesaID
+  }
+})
+    res.status(201).json({msg:"Reserva exitosa", "Reserva":reserva});
   } catch (error) {
     console.error('Error al crear la reserva:', error);
     res.status(500).json({ error: 'Error al crear la reserva' });
