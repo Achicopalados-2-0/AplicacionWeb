@@ -64,20 +64,23 @@ function iniciarApp(){
         arregloInputs.forEach(input => {
             datos[input.name] = !isNaN(+input.value.trim()) && input.value.trim() !== "" ? +input.value.trim() : input.value.trim()
         })
+
+        //esta configurado de manera manual el idcliente
+        datos['ClienteID']=1
         inputSubmit.classList.add("form__input--ocultar")
         const spinner = creaSpinner()
         inputContainer.appendChild(spinner)
         
-        const respuesta = await enviaPeticion()
+        const respuesta = await enviaPeticion(datos) //llamar funcion
         
-        setTimeout(() => {
+        console.log(respuesta)
             inputSubmit.disabled = false;
             inputSubmit.classList.remove("form__input--ocultar")
             spinner.remove();
             if(Object.keys(respuesta).length === 0){
                 muestraMensaje(contenedorMensajes, "Ocurrió un error al momento de reservar")
             }
-        }, 3000);
+       
 
         form.reset();
     }
@@ -123,9 +126,9 @@ function iniciarApp(){
         }
     }
 
-    async function enviaPeticion(datos){
+    async function enviaPeticion(datos){ //recibir datos
         try{
-            const resultado = await fetch("", {
+            const resultado = await fetch("http://localhost:3000/auth/crearReserva", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
