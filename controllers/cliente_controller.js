@@ -2,7 +2,7 @@ import {body, param, validationResult} from "express-validator"; //dependencia q
 import Cliente from "../models/Clientes.js";
 import Reservas from "../models/Reservas.js";
 
-//registro
+    //registro
 export const registro=async(req, res)=>{
     //seguridad
     //correo

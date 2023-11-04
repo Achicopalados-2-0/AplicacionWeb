@@ -2,19 +2,6 @@ import {body, param, validationResult} from "express-validator"; //dependencia q
 import Reservas from "../models/Reservas.js";
 import Mesas from "../models/Mesas.js";
 
-//Obtener todas las reservas (pagina administradores)
-// export const getAllReservas=async (req, res)=>{
-//   try {
-//     const reservas = await Reservas.findAll();
-//     res.json(reservas);
-//   } catch (error) {
-//     console.error('Error al obtener las reservas:', error);
-//     res.status(500).json({ error: 'Error al obtener las reservas' });
-//   }
-// }
-//sitemipe
-//
-
 //Crear una nueva reserva
 
   export const crearReserva=async(req, res)=>{
