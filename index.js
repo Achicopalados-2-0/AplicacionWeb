@@ -14,7 +14,7 @@ app.use(express.json());
 dotenv.config();
 
 //conexion a front
-const dominiosPermitidos = ["http://127.0.0.1:5500"];
+const dominiosPermitidos = ["http://127.0.0.1:5500", "http://137.184.102.132:3000"];
 const corsOptions = {
     origin: function(origin, callback){
         if(dominiosPermitidos.indexOf(origin) !== -1){
