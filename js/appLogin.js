@@ -95,7 +95,7 @@ function iniciarApp(){
 
     async function enviaPeticion(datos){
         try{
-            const resultado = await fetch("", {
+            const resultado = await fetch("aplicacionweb-production.up.railway.app", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
