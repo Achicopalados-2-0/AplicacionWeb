@@ -296,6 +296,44 @@ img{
     border-radius: 1rem;
 }
 
+/* contendorUsuarioLogin */
+.contendorUsuarioLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.contendorUsuarioLogin h2{
+    color: var(--red);
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.contendorUsuarioLogin p{
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.contendorUsuarioLogin a{
+    background-color: var(--red);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    width: 18rem;
+    text-decoration: none;
+    border: 1px solid var(--red);
+    transition: background-color .3s;
+    margin: 0 auto;
+}
+
+.contendorUsuarioLogin a:hover{
+    background-color: var(--white);
+    color: var(--titleColor);
+}
+
 /* form__div */
 .form__div:not(:last-of-type){
     margin-bottom: 1.5rem;
@@ -349,7 +387,7 @@ img{
         gap: 2rem;
     }
 
-    .form, .reservacion__imgContainer{
+    .form, .reservacion__imgContainer, .contendorUsuarioLogin{
         flex-basis: 50%;
     }
 
@@ -441,7 +479,7 @@ img{
 }
 
 /* favoritos */
-#favoritos{
+#favoritos, #mesa{
     max-width: 120rem;
     margin: 4rem auto;
 }
