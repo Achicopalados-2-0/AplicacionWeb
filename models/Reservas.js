@@ -39,6 +39,8 @@ const Reservas = db.define('Reservas', {
         type: DataTypes.TEXT,
         allowNull: false
     }
+},{
+    timestamps: false, // genera columnas y actualizar en el momento 
 })
 
 Reservas.belongsTo(Clientes, { foreignKey: 'ClienteID', as: 'cliente' });
