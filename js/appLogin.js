@@ -103,7 +103,7 @@ function iniciarApp(){
     async function enviaPeticion(datos, tipo){
         console.log(datos)
         try{
-            const resultado = await fetch(`http://localhost:3000/auth/${tipo}`, {
+            const resultado = await fetch(`https://aplicacionweb-production.up.railway.app/auth/${tipo}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

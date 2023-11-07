@@ -2,7 +2,7 @@ let estaLogueado = false, cliente;//variable que nos permite verificar si un usu
 (async function(){
     try {
         //hacemos un fetch a la url para traer los datos del usuario y si este 
-        const respuesta = await fetch(`http://localhost:3000/auth/datos_usuario/${localStorage.getItem("token") || "singup"}`, {
+        const respuesta = await fetch(`https://aplicacionweb-production.up.railway.app/auth/datos_usuario/${localStorage.getItem("token") || "singup"}`, {
             method: "GET", // El método de la solicitud (puede ser GET, POST, etc.)
             headers: {
               "Authorization": `Bearer ${localStorage.getItem("token") || "singup"}` // Agrega el token en el encabezado Authorization
@@ -178,7 +178,7 @@ function iniciarApp(){
 
     async function enviaPeticion(datos){
         try{
-            const resultado = await fetch("http://localhost:3000/auth/crearReserva", {
+            const resultado = await fetch("https://aplicacionweb-production.up.railway.app/auth/crearReserva", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
