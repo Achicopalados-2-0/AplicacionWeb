@@ -33,21 +33,28 @@ function iniciarApp(){
         const spinner = creaSpinner()
         inputContainer.appendChild(spinner)
         
-        const respuesta = await enviaPeticion()
-        
-        setTimeout(() => {
-            inputSubmit.disabled = false;
-            inputSubmit.classList.remove("form__input--ocultar")
-            spinner.remove();
-            mensaje = e.target.id === "formLogin" ? "iniciar sesión" : "registrarse"
-            if(Object.keys(respuesta).length === 0){
-                muestraMensaje(contenedorMensajes, `Ocurrió un error al momento de ${mensaje}`)
-            }else{
-                muestraMensaje(contenedorMensajes, "Inicio de sesión exitoso", true)
-            }
-        }, 3000);
+        mensaje = e.target.id === "formLogin" ? "iniciar sesión" : "registrarse";
+        const tipo = mensaje === "registrarse" ? "registro" : "inicio_sesion";
+        const respuesta = await enviaPeticion(datos, tipo);
 
-        e.target.reset();
+        if(respuesta.token){
+            localStorage.setItem("token",respuesta.token)
+        }
+
+        inputSubmit.disabled = false;
+        inputSubmit.classList.remove("form__input--ocultar")
+        spinner.remove();
+        
+        if(Object.keys(respuesta).includes("errores")){
+            muestraMensaje(contenedorMensajes, `Ocurrió un error al momento de ${mensaje}`)
+        }else{
+            muestraMensaje(contenedorMensajes, `${mensaje === "registrarse" ? "Registro" : "Inicio de sesión"} exitoso`, true)
+            e.target.reset();
+            if(mensaje === "iniciar sesión"){
+                window.location.href = "http://127.0.0.1:5500"
+            }
+        }
+
     }
 
     function validaForm(input){
@@ -93,9 +100,10 @@ function iniciarApp(){
         }
     }
 
-    async function enviaPeticion(datos){
+    async function enviaPeticion(datos, tipo){
+        console.log(datos)
         try{
-            const resultado = await fetch("aplicacionweb-production.up.railway.app", {
+            const resultado = await fetch(`http://localhost:3000/auth/${tipo}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -105,7 +113,8 @@ function iniciarApp(){
             const respuesta = await resultado.json()
             return respuesta
         }catch(error){
-            return {}
+            console.log(error)
+            return error
         }
     }
 

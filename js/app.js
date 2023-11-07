@@ -1,3 +1,54 @@
+let estaLogueado = false, cliente;//variable que nos permite verificar si un usuario esta logueado y otra para almacenar los datos del usuario 
+(async function(){
+    try {
+        //hacemos un fetch a la url para traer los datos del usuario y si este 
+        const respuesta = await fetch(`http://localhost:3000/auth/datos_usuario/${localStorage.getItem("token") || "singup"}`, {
+            method: "GET", // El método de la solicitud (puede ser GET, POST, etc.)
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem("token") || "singup"}` // Agrega el token en el encabezado Authorization
+            }
+          });
+        if (!respuesta.ok) {
+            throw new Error("Error al cargar los datos");
+        }
+        const resultado = await respuesta.json();//transformamos el respuesta en un objeto tipo json
+        estaLogueado = resultado.logueado;
+        cliente = resultado.cliente;
+    } catch (error) {
+        if(localStorage.getItem("token")){
+            localStorage.removeItem("token");
+        }
+        const form = document.querySelector("#form");//selecciono el form 
+        const containerReservacion = document.querySelector("#reservacion"); //obtengo la referencia del contenedor donde alamaceno el form y la img
+        const imgReservacion = document.querySelector(".reservacion__imgContainer"); //obtengo la referencia del contenedor de la img
+
+        form.remove()//elimino el form ya que aún no inicia sesión el usuario
+        const divContainer = document.createElement("DIV");//creo una etiqueta div
+        const h2 = document.createElement("H2");//creo una etiqueta h2
+        const p = document.createElement("P");//creo una etiqueta p
+        const enlace = document.createElement("A");//creo una etiqueta a
+        h2.textContent = "Usted aún no inicia sesión";//agrego el texto que mostrará el h2
+        p.textContent = "Inicie sesión para reservar";//agrego el texto que mostrará el p
+        enlace.textContent = "INICIAR SESIÓN";//agrego el texto que mostrará el a
+        enlace.href = "/login.html";//agrego la ruta a la que redireccionara cuando presionen el enlace
+        
+        divContainer.appendChild(h2);//agrego al div que creamos el h2
+        divContainer.appendChild(p);//agrego al div que creamos el p
+        divContainer.appendChild(enlace);//agrego al div que creamos el a
+        divContainer.classList.add("contendorUsuarioLogin")//agrego el div que creamos la clase "contenedorUsuarioLogin"
+        
+        //la estructura que esto nos genera es la siguiente
+        // <div class="contendorUsuarioLogin">
+        //     <h2>Usted aún no inicia sesión</h2>
+        //     <p>Inicie sesión para reservar</p>
+        //     <a href="/login.html">INICIAR SESIÓN</a>
+        // </div>
+        containerReservacion.insertBefore(divContainer, imgReservacion)//agregamos la estructura que creamos antes del contenedor de la imagen
+    }
+    iniciarApp();
+})();//IIFE
+
+
 const referenciaMensaje = {
     "mesas": "La mesa",
     "fecha": "La fecha",
@@ -6,19 +57,20 @@ const referenciaMensaje = {
     "comentarios": "El comentario",
 }
 
-document.addEventListener("DOMContentLoaded", iniciarApp);
-
 function iniciarApp(){
     const botonMenu = document.querySelector(".button__menu");
     const botonNavegacion = document.querySelector(".nav__button");
-    const enlaces = document.querySelectorAll(".navegacion__enlace")
-    const form = document.querySelector("#form")
+    const enlaces = document.querySelectorAll(".navegacion__enlace");
+    const form = document.querySelector("#form");
+    
     
     botonMenu.addEventListener("click", handleMenu);
     botonNavegacion.addEventListener("click", handleMenu);
     enlaces.forEach(e => e.addEventListener("click", handleMenu))
 
-    form.addEventListener("submit", handleForm)
+    if(form){
+        form.addEventListener("submit", handleForm)
+    }
 
     function handleMenu(){
         const navegacion = document.querySelector(".nav")
@@ -64,22 +116,23 @@ function iniciarApp(){
         arregloInputs.forEach(input => {
             datos[input.name] = !isNaN(+input.value.trim()) && input.value.trim() !== "" ? +input.value.trim() : input.value.trim()
         })
+        datos["ClienteID"] = cliente.ClienteID
         inputSubmit.classList.add("form__input--ocultar")
         const spinner = creaSpinner()
         inputContainer.appendChild(spinner)
         
-        const respuesta = await enviaPeticion()
+        const respuesta = await enviaPeticion(datos)
         
-        setTimeout(() => {
-            inputSubmit.disabled = false;
-            inputSubmit.classList.remove("form__input--ocultar")
-            spinner.remove();
-            if(Object.keys(respuesta).length === 0){
-                muestraMensaje(contenedorMensajes, "Ocurrió un error al momento de reservar")
-            }
-        }, 3000);
+        inputSubmit.disabled = false;
+        inputSubmit.classList.remove("form__input--ocultar")
+        spinner.remove();
+        if(Object.keys(respuesta).includes("errores")){
+            muestraMensaje(contenedorMensajes, "Ocurrió un error al momento de reservar")
+        }else{
+            muestraMensaje(contenedorMensajes, `Reservación exitosa`, true)
+            form.reset();
+        }
 
-        form.reset();
     }
 
     function validaForm(input){
@@ -125,7 +178,7 @@ function iniciarApp(){
 
     async function enviaPeticion(datos){
         try{
-            const resultado = await fetch("aplicacionweb-production.up.railway.app", {
+            const resultado = await fetch("http://localhost:3000/auth/crearReserva", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
