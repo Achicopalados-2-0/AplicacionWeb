@@ -14,7 +14,7 @@ app.use(express.json());
 dotenv.config();
 
 //conexion a front
-const dominiosPermitidos = [DOMINIO];
+const dominiosPermitidos = [process.env.DOMINIO];
 const corsOptions = {
     origin: function(origin, callback){
         if(dominiosPermitidos.indexOf(origin) !== -1){

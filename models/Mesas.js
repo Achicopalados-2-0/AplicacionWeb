@@ -17,7 +17,7 @@ import db from '../config/db.js';
             allowNull: false
         },
         EstadoMesa: {
-            type: DataTypes.ENUM('ocupada', 'disponible', 'reservada'),
+            type: DataTypes.STRING,
             allowNull: false
         }
     })
