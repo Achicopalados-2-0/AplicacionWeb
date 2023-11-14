@@ -14,18 +14,18 @@ app.use(express.json());
 dotenv.config();
 
 //conexion a front
-const dominiosPermitidos = [process.env.DOMINIO];
-const corsOptions = {
-    origin: function(origin, callback){
-        if(dominiosPermitidos.indexOf(origin) !== -1){
-            callback(null, true);
-        }else{
-            callback(new Error("No permitido por CORS"))
-        }
-    }
-}
+//const dominiosPermitidos = ['https://achicopalados.main'];
+//const corsOptions = {
+  //  origin: function(origin, callback){
+    //    if(dominiosPermitidos.indexOf(origin) !== -1){
+      //      callback(null, true);
+        //}else{
+          //  callback(new Error("No permitido por CORS"))
+        //}
+    //}
+//}
 
-app.use(cors(corsOptions)) //seguridad(especificar que rutas estan permitidas para hacer llamados)
+//app.use(cors(corsOptions)) //seguridad(especificar que rutas estan permitidas para hacer llamados)
 
 app.use("/auth", cliente_rutas)
 
