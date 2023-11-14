@@ -14,7 +14,7 @@ app.use(express.json());
 dotenv.config();
 
 //conexion a front
-const dominiosPermitidos = [process.env.DOMINIO];
+const dominiosPermitidos = ['https://achicopaladosv2.netlify.app/'];
 const corsOptions = {
     origin: function(origin, callback){
         if(dominiosPermitidos.indexOf(origin) !== -1){
