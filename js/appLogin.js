@@ -51,7 +51,7 @@ function iniciarApp(){
             muestraMensaje(contenedorMensajes, `${mensaje === "registrarse" ? "Registro" : "Inicio de sesión"} exitoso`, true)
             e.target.reset();
             if(mensaje === "iniciar sesión"){
-                window.location.href = "https://resilient-mochi-8217bc.netlify.app"
+                window.location.href = "https://achicopaladosv2.netlify.app/"
             }
         }
 
