@@ -4,8 +4,7 @@ import cliente_rutas from "./routes/clientes_rutas.js";
 import db from "./config/db.js";
 import helmet from "helmet"; //modifica cabeceras
 import cors from "cors";
-
-
+import path from 'path';//Contruye rutas  hacia otros directorios
 const app = express();
 app.use(helmet());
 
@@ -18,8 +17,14 @@ dotenv.config();
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 //app.get('/css', (req, res) => { res.sendFile(`${__dirname}css`) })
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
-app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
+app.get('/', (req,res) => {
+  res.sendFile(__dirname + '/login.html');
+});
+//(linea palma)app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
 //app.get('/', (req, res) => { res.sendFile(`${__dirname}login.html`) })
 //app.get('/', (req, res) => { res.sendFile(`${__dirname}`) })
 //conexion a front
