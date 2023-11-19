@@ -14,6 +14,7 @@ app.use(express.json());
 dotenv.config();
 
 app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
+app.get('/', (req, res) => { res.sendFile(`${__dirname}login.html`) })
 //conexion a front
 //const dominiosPermitidos = ['https://achicopalados.main'];
 //const corsOptions = {
