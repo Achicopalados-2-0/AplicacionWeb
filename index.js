@@ -4,7 +4,7 @@ import cliente_rutas from "./routes/clientes_rutas.js";
 import db from "./config/db.js";
 import helmet from "helmet"; //modifica cabeceras
 import cors from "cors";
-import { join } from 'path';
+
 
 const app = express();
 app.use(helmet());
@@ -16,11 +16,11 @@ dotenv.config();
 // Configurar el middleware para servir archivos estáticos desde carpetas específicas
 //app.use('/css', express.static(path.join(__dirname, 'css')));
 //app.use('/images', express.static(path.join(__dirname, 'images')));
-app.get('/css', (req, res) => { res.sendFile(`${__dirname}css`) })
+//app.get('/css', (req, res) => { res.sendFile(`${__dirname}css`) })
 
 
 app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
-app.get('/', (req, res) => { res.sendFile(`${__dirname}login.html`) })
+//app.get('/', (req, res) => { res.sendFile(`${__dirname}login.html`) })
 //app.get('/', (req, res) => { res.sendFile(`${__dirname}`) })
 //conexion a front
 //const dominiosPermitidos = ['https://achicopalados.main'];
