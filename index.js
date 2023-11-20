@@ -17,8 +17,8 @@ dotenv.config();
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 //app.get('/css', (req, res) => { res.sendFile(`${__dirname}css`) })
 
-
-app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
+app.get('/', (req, res) => { res.sendFile(path.join(__dirname, 'index.html')) })
+//app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
 //app.get('/', (req, res) => { res.sendFile(`${__dirname}login.html`) })
 //app.get('/', (req, res) => { res.sendFile(`${__dirname}`) })
 //conexion a front
