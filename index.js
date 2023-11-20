@@ -13,15 +13,9 @@ app.use(helmet());
 app.use(express.json());
 
 dotenv.config();
-// Configurar el middleware para servir archivos estáticos desde carpetas específicas
-//app.use('/css', express.static(path.join(__dirname, 'css')));
-//app.use('/images', express.static(path.join(__dirname, 'images')));
-//app.get('/css', (req, res) => { res.sendFile(`${__dirname}css`) })
+// Configurar las rutas de las carpetas(conexion al front)
+app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
 
-app.get('/', (req, res) => { res.sendFile(path.join(__dirname, 'index.html')) })
-//app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
-//app.get('/', (req, res) => { res.sendFile(`${__dirname}login.html`) })
-//app.get('/', (req, res) => { res.sendFile(`${__dirname}`) })
 //conexion a front
 //const dominiosPermitidos = ['https://achicopalados.main'];
 //const corsOptions = {
