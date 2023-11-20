@@ -4,6 +4,7 @@ import cliente_rutas from "./routes/clientes_rutas.js";
 import db from "./config/db.js";
 import helmet from "helmet"; //modifica cabeceras
 import cors from "cors";
+import path from "path";
 //Contruye rutas  hacia otros directorios
 const app = express();
 app.use(helmet());
