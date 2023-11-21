@@ -32,7 +32,7 @@ dotenv.config();
 
 //app.use(cors(corsOptions)) //seguridad(especificar que rutas estan permitidas para hacer llamados)
 
-app.use("/auth", cliente_rutas)
+app.use("/", cliente_rutas)
 
 // conexion a la base de datos
 try{
