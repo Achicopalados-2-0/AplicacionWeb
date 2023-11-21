@@ -4,6 +4,8 @@ import { crearReserva } from '../controllers/reservas_controller.js';
 const router = express.Router(); //genera el router de la pag (controlador)
 
 // Routing
+router.get('/', (req, res) => { res.sendFile('index.html') })
+router.get('/login.html', (req, res) => { res.sendFile('login.html') })
 router.post("/registro", registro);
 router.post("/inicio_sesion", inicio_sesion);
 router.post("/crearReserva", crearReserva);

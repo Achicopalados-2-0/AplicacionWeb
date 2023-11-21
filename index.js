@@ -3,18 +3,20 @@ import dotenv from "dotenv"
 import cliente_rutas from "./routes/clientes_rutas.js";
 import db from "./config/db.js";
 import helmet from "helmet"; //modifica cabeceras
-import cors from "cors";
-import { dirname } from 'path';
+
+
 //Contruye rutas  hacia otros directorios
 const app = express();
 app.use(helmet());
 
 // Habilitar lectura de datos de formularios
 app.use(express.json());
+app.use(express.static('views'));
+app.use(express.static('public'));
 
 dotenv.config();
 // Configurar las rutas de las carpetas(conexion al front)
-app.get('/', (req, res) => { res.sendFile(`${__dirname}index.html`) })
+
 
 //conexion a front
 //const dominiosPermitidos = ['https://achicopalados.main'];

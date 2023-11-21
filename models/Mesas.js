@@ -20,6 +20,10 @@ import db from '../config/db.js';
             type: DataTypes.STRING,
             allowNull: false
         }
-    })
+
+    },{
+        timestamps: false, // genera columnas y actualizar en el momento 
+    }) 
+
 
 export default Mesas;
